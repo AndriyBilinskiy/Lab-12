@@ -3,6 +3,12 @@ package atm;
 public class Handler5 extends Handler{
     @Override
     public void process(int price) {
-        System.out.println(price / 50);
+        Handler next = getNext();
+        if (price % 5 > 0 && next == null) {
+            throw new IllegalArgumentException();
+        } else if (next != null){
+            getNext().process(price % 5);
+        }
+        System.out.println(price / 5 + " * 5");
     }
 }
